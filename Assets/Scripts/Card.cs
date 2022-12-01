@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Card : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class Card : MonoBehaviour
     public void FlipCard()
     {
         isFaceUp = !isFaceUp;
+
+        transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 180, 0), 1f);
+
         Debug.Log("isFaceUp: " + isFaceUp);
     }
 
