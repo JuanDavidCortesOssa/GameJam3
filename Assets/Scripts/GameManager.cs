@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+    public TextMeshProUGUI matchesText;
+
     public GameObject card;
     public GameObject board;
     public CardSO[] cardsSOs = new CardSO[16];
@@ -11,7 +14,6 @@ public class GameManager : Singleton<GameManager>
     public List<int> totals;
 
     private int totalMatches = 0;
-
     private List<Card> flipedCards = new List<Card>();
 
     void Start()
@@ -34,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     public void TryToFlip(Card card)
     {
         if (card.isFaceUp || card.isFlipping) return;
-
+        Debug.Log(flipedCards.Count);
         if (flipedCards.Count <= 1)
         {
             flipedCards.Add(card);
@@ -54,15 +56,10 @@ public class GameManager : Singleton<GameManager>
             for (int i = 0; i < totals.Count; i++)
             {
                 if (cardsTotal == totals[i])
-                {
+                {           
                     isMatch = true;
-                    Debug.Log("Match");
-                    totalMatches++;
-                    if (totalMatches == 8)
-                    {
-                        Debug.Log("WinGame");
-                    }
-                    break;
+                    IncreaseMatches();
+                break;
                 }
             }
             if (!isMatch)
@@ -79,6 +76,7 @@ public class GameManager : Singleton<GameManager>
         {
             flipedCards.RemoveAt(i);
         }
+        Debug.Log("Cards cleaned :" + flipedCards.Count);
     }
 
     public void ShuffleDeck()
@@ -92,8 +90,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    void Update()
+    private void IncreaseMatches()
     {
+        Debug.Log("Match");
+        CleanFlipedCards();
+        totalMatches++;
         
+        if (totalMatches == 8)
+        {
+            Debug.Log("WinGame");
+        }
+        else
+        {
+            matchesText.text = "Total Matches: " + totalMatches;
+        }
     }
 }
