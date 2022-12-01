@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8529625957495009499}
   - component: {fileID: 8529625957495009498}
+  - component: {fileID: 6726202723934148529}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -122,7 +123,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8529625957495009496}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -131,7 +132,7 @@ Transform:
   - {fileID: 8529625957605323911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &8529625957495009498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upFaceMesh: {fileID: 8529625957082042983}
   downFaceMesh: {fileID: 8529625957605323913}
+--- !u!65 &6726202723934148529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529625957495009496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0016456, y: 1.5005896, z: 0.088598356}
+  m_Center: {x: 0.0008227825, y: 0.005236745, z: 0.014791057}
 --- !u!1 &8529625957605323908
 GameObject:
   m_ObjectHideFlags: 0

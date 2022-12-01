@@ -8,12 +8,17 @@ public class Card : MonoBehaviour
     //public variables
     public MeshRenderer upFaceMesh;
     public MeshRenderer downFaceMesh;
+    public bool isFaceUp = false;
+    public bool isFlipping = false;
 
     private int cardValue = 0;
-    private bool isFaceUp = false;
+    private GameManager gameManager;
+    [HideInInspector] public Tween tweener;
+    [HideInInspector] public delegate void CheckCards();
 
     void Start()
     {
+        gameManager = GameManager.Instance;
     }
 
     public void SetCard(CardSO cardSO) 
@@ -31,16 +36,14 @@ public class Card : MonoBehaviour
     [ContextMenu("FlipCard")]
     public void FlipCard()
     {
+        isFlipping = true;
         isFaceUp = !isFaceUp;
-
-        transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 180, 0), 1f);
-
-        Debug.Log("isFaceUp: " + isFaceUp);
+        tweener = transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 180 * -1, 0), 1f)
+            .OnComplete(()=> isFlipping = false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        
+        gameManager.TryToFlip(this);
     }
 }
