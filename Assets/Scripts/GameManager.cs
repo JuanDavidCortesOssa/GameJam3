@@ -10,11 +10,13 @@ public class GameManager : Singleton<GameManager>
     public Transform[] cardsPositions = new Transform[16];
     public List<int> totals;
 
-    //private int flipedCards = 0;
+    private int totalMatches = 0;
+
     private List<Card> flipedCards = new List<Card>();
 
     void Start()
     {
+        ShuffleDeck();
         InstanceCards();
     }
 
@@ -37,7 +39,6 @@ public class GameManager : Singleton<GameManager>
         {
             flipedCards.Add(card);
             card.FlipCard();
-            Debug.Log(flipedCards.Count);
 
             if (flipedCards.Count == 2)
             {
@@ -56,6 +57,11 @@ public class GameManager : Singleton<GameManager>
                 {
                     isMatch = true;
                     Debug.Log("Match");
+                    totalMatches++;
+                    if (totalMatches == 8)
+                    {
+                        Debug.Log("WinGame");
+                    }
                     break;
                 }
             }
@@ -75,11 +81,16 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void SortCardPositions()
+    public void ShuffleDeck()
     {
-        //TODO
+        for (int i = 0; i < cardsPositions.Length; i++)
+        {
+            int randomPos = Random.Range(0, cardsPositions.Length);
+            Transform tempTransform = cardsPositions[randomPos];
+            cardsPositions[randomPos] = cardsPositions[i];
+            cardsPositions[i] = tempTransform;
+        }
     }
-
 
     void Update()
     {
