@@ -1,27 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
     public void ChangeScene(string sceneName)
     {
-        EditorSceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void LoadCredits()
     {
-        EditorSceneManager.LoadScene("Credits");
+        SceneManager.LoadScene("Credits");
     }
 
     public void LoadMainMenu()
     {
-        EditorSceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadMainScene()
     {
-        EditorSceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene");
     }
 }
