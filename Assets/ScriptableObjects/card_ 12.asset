@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e085b31090ecb3f458b8be734e7bb2b4, type: 3}
   m_Name: card_ 12
   m_EditorClassIdentifier: 
-  upFaceMat: {fileID: 2100000, guid: 95cc42bce0e5c56468b767e13b6dc70d, type: 2}
+  upFaceMat: {fileID: 2100000, guid: 083b3dd780bda634799d6083367f3125, type: 2}
   downFaceMat: {fileID: 2100000, guid: 6977fb7ae2b4f0b45b1d5b89f187099f, type: 2}
-  cardValue: 50
+  cardValue: 20

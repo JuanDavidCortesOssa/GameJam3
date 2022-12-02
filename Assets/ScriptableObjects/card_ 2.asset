@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upFaceMat: {fileID: 2100000, guid: 637b850bb3c1e064cbb36b6d909e2052, type: 2}
   downFaceMat: {fileID: 2100000, guid: 6977fb7ae2b4f0b45b1d5b89f187099f, type: 2}
-  cardValue: 50
+  cardValue: 10
