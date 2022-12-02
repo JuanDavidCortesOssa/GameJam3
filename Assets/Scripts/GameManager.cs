@@ -5,19 +5,22 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
-    public TextMeshProUGUI matchesText;
+    //public TextMeshProUGUI matchesText;
 
     public GameObject card;
     public GameObject board;
-    public CardSO[] cardsSOs = new CardSO[16];
-    public Transform[] cardsPositions = new Transform[16];
-    public List<int> totals;
+    public CardSO[] cardsSOs = new CardSO[12];
+    public Transform[] cardsPositions = new Transform[12];
+    public List<TotalBehaviour> totals;
 
     private int totalMatches = 0;
     private List<Card> flipedCards = new List<Card>();
 
+    private SoundManager soundManager;
+
     void Start()
     {
+        soundManager = SoundManager.Instance;
         ShuffleDeck();
         InstanceCards();
     }
@@ -36,11 +39,12 @@ public class GameManager : Singleton<GameManager>
     public void TryToFlip(Card card)
     {
         if (card.isFaceUp || card.isFlipping) return;
-        Debug.Log(flipedCards.Count);
+        //Debug.Log(flipedCards.Count);
         if (flipedCards.Count <= 1)
         {
             flipedCards.Add(card);
             card.FlipCard();
+            soundManager.PlayFlipCardSound();
 
             if (flipedCards.Count == 2)
             {
@@ -55,15 +59,18 @@ public class GameManager : Singleton<GameManager>
             bool isMatch = false;
             for (int i = 0; i < totals.Count; i++)
             {
-                if (cardsTotal == totals[i])
-                {           
+            //Debug.Log(totals[i].value);
+                if (cardsTotal == totals[i].value)
+                {
                     isMatch = true;
-                    IncreaseMatches();
+                    totals[i].Activate();
+                    MatchDetected();
                 break;
                 }
             }
             if (!isMatch)
             {
+                soundManager.PlayIncorrectMatchSound();
                 flipedCards[0].FlipCard();
                 flipedCards[1].FlipCard();
             }
@@ -76,7 +83,7 @@ public class GameManager : Singleton<GameManager>
         {
             flipedCards.RemoveAt(i);
         }
-        Debug.Log("Cards cleaned :" + flipedCards.Count);
+        //Debug.Log("Cards cleaned :" + flipedCards.Count);
     }
 
     public void ShuffleDeck()
@@ -90,19 +97,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void IncreaseMatches()
+    private void MatchDetected()
     {
-        Debug.Log("Match");
+        //Debug.Log("Match");
         CleanFlipedCards();
         totalMatches++;
-        
-        if (totalMatches == 8)
+        soundManager.PlayMatchSound();
+
+        if (totalMatches == 6)
         {
-            Debug.Log("WinGame");
-        }
-        else
-        {
-            matchesText.text = "Total Matches: " + totalMatches;
+            soundManager.PlayWinSound();
         }
     }
+
 }

@@ -6,7 +6,6 @@ using DG.Tweening;
 public class Card : MonoBehaviour
 {
     //public variables
-    public AudioSource audioSource;
     public MeshRenderer upFaceMesh;
     public MeshRenderer downFaceMesh;
     public bool isFaceUp = false;
@@ -39,8 +38,6 @@ public class Card : MonoBehaviour
     {
         isFlipping = true;
         isFaceUp = !isFaceUp;
-        //audio
-        audioSource.Play();
         tweener = transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 180 * -1, 0), 1f)
             .OnComplete(()=> isFlipping = false);
     }
@@ -48,5 +45,10 @@ public class Card : MonoBehaviour
     private void OnMouseDown()
     {
         gameManager.TryToFlip(this);
+    }
+
+    private void OnMouseEnter()
+    {
+        //TODO Glowing Border
     }
 }
