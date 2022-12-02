@@ -5,8 +5,6 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
-    //public TextMeshProUGUI matchesText;
-
     public GameObject card;
     public GameObject board;
     public CardSO[] cardsSOs = new CardSO[12];
@@ -17,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     private List<Card> flipedCards = new List<Card>();
 
     private SoundManager soundManager;
+    [SerializeField] private EasyTween continueCanvasAnim;
 
     void Start()
     {
@@ -107,6 +106,7 @@ public class GameManager : Singleton<GameManager>
         if (totalMatches == 6)
         {
             soundManager.PlayWinSound();
+            continueCanvasAnim.OpenCloseObjectAnimation();
         }
     }
 
